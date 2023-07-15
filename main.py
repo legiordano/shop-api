@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Example data for the store
 products = [
     {
         'id': 1,
@@ -18,12 +17,10 @@ products = [
     }
 ]
 
-# Route to get all products
 @app.route('/products', methods=['GET'])
 def get_products():
     return jsonify(products)
 
-# Route to get a product by its ID
 @app.route('/products/<int:product_id>', methods=['GET'])
 def get_product(product_id):
     product = next((p for p in products if p['id'] == product_id), None)
@@ -32,7 +29,6 @@ def get_product(product_id):
     else:
         return jsonify({'message': 'Product not found'}), 404
 
-# Route to create a new product
 @app.route('/products', methods=['POST'])
 def create_product():
     new_product = {
